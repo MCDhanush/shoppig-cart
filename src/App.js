@@ -108,7 +108,7 @@ function MainCnt() {
             style={{
               width: "150px",
               height: "45px",
-              backgroundColor: "#aaaaa0",
+              backgroundColor: "#f8f9ff",
               borderRadius: "8px",
               alignItems: "center",
               justifyContent: "space-evenly",
