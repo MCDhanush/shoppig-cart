@@ -4,6 +4,7 @@ import profileImg from "./images/image-avatar.png";
 
 export function Navbar() {
   const [cartOC, setCartOC] = useState(false);
+  const [active, setActive] = useState(false);
 
   return (
     <header style={{ padding: "0 120px" }}>
@@ -31,7 +32,25 @@ export function Navbar() {
               false
             )}
           </div>
-          <img class="profile-icon" src={profileImg} alt="profile" />
+          <div>
+            <img
+              class="profile-icon"
+              src={profileImg}
+              onClick={() => setActive(!active)}
+              style={{
+                backgroundColor: active ? "hsl(26, 100%, 55%)" : "white",
+              }}
+              alt="profile"
+            />
+            {active ? (
+              <div id="profile-list" class="profile-list1">
+                <p id="profile-container">Profile</p>
+                <div id="cart-list"></div>
+              </div>
+            ) : (
+              false
+            )}
+          </div>
         </div>
       </div>
     </header>

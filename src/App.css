@@ -76,7 +76,8 @@
 .header-cnt2 {
   justify-content: center;
 }
-#shopping-cart-list {
+#shopping-cart-list,
+#profile-list {
   /* display: block; */
   width: 280px;
   min-height: 200px;
@@ -147,11 +148,27 @@
 }
 .add-but {
   display: flex;
-  background-color: hsl(26, 100%, 55%);
+  /* background-color: hsl(26, 100%, 55%); */
   color: white;
   border-radius: 15px;
 }
 #images-sub {
   height: 65px;
   border-radius: 10px;
+}
+#profile-container {
+  padding: 10px;
+  font: 10px;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.thumbs,
+.carousel-status {
+  display: none !important;
+}
+
+.carousel.carousel-slider .control-arrow {
+  /* background-color: red !important; */
+}
+.carousel-status {
 }
