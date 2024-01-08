@@ -23,17 +23,17 @@ const activeCSS = {
   // background: linear-gradient(to bottom, rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0.2));
 };
 
-export function MainCnt({ handleBtnClick }) {
+export function MainCnt({ handleBtnClick, increase, decrease, count }) {
   // this is my approach(when i think this idea will came)
   const [iscarousel, setIscarousel] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
 
   const [imageUrl, setImageUrl] = useState(imagesMain);
 
-  const [fiImg, setFiImg] = useState(true, 0);
-  const [sec, setSec] = useState(false, 1);
-  const [thir, setThir] = useState(false, 2);
-  const [four, setFour] = useState(false, 3);
+  const [fiImg, setFiImg] = useState(true);
+  const [sec, setSec] = useState(false);
+  const [thir, setThir] = useState(false);
+  const [four, setFour] = useState(false);
 
   const handleImageClick = (imageSetter) => {
     // Deactivate all images
@@ -51,15 +51,7 @@ export function MainCnt({ handleBtnClick }) {
     subHead: "Fall inside edition sneaker",
     count: 0,
   };
-  const [count, setCount] = useState(productDetail.count);
-
-  const handleDecrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    } else if (count < 0) {
-      setCount((count = 0));
-    }
-  };
+  // const [count, setCount] = useState(productDetail.count);
 
   const calculateamount = () => {
     let total = count * 125;
@@ -275,9 +267,9 @@ export function MainCnt({ handleBtnClick }) {
               justifyContent: "space-evenly",
             }}
           >
-            <img onClick={() => handleDecrement()} src={Minus} />
+            <img onClick={decrease} src={Minus} />
             <p>{count}</p>
-            <img onClick={() => setCount(count + 1)} src={Plus} />
+            <img onClick={increase} src={Plus} />
           </div>
           <div
             className="add-but"

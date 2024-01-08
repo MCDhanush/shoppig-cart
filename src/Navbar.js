@@ -2,27 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import profileImg from "./images/image-avatar.png";
 
-export function Navbar({ cartItem }) {
+export function Navbar({ cartItem, id, price, subHead, count }) {
   const [cartOC, setCartOC] = useState(false);
   const [active, setActive] = useState(false);
-
-  const popupRef = useRef();
-
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setCartOC(false);
-      }
-    };
-
-    if (cartOC) {
-      document.addEventListener("click", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [cartOC]);
 
   return (
     <header style={{ padding: "0 120px" }}>
@@ -55,13 +37,16 @@ export function Navbar({ cartItem }) {
               {cartItem}
             </div>
             {cartOC ? (
-              <div
-                id="shopping-cart-list"
-                ref={popupRef}
-                class="shopping-cart-list1"
-              >
-                <p id="car-inside-container">cart</p>
-                <div id="cart-list"></div>
+              <div id="shopping-cart-list" class="shopping-cart-list1">
+                <p id="car-inside-container">{count}</p>
+                <div id="cart-list">
+                  <li key={id}>
+                    <p>ID: {id}</p>
+                    <p>Price: {price * count}</p>
+                    <p>SubHead: {subHead}</p>
+                    {/* <button onClick={() => deleteItem(item.id)}>Delete</button> */}
+                  </li>
+                </div>
                 <div id="checkout">
                   <p>checkout</p>
                 </div>
