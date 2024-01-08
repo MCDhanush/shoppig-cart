@@ -14,9 +14,21 @@ import { Navbar } from "./Navbar";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
-export function MainCnt() {
+// const imageArr = [imagesSub1, imagesSub2, imagesSub3, imagesSub4];
+const mainImagesArr = [imagesMain, imagesMain2, imagesMain3, imagesMain4];
+
+const activeCSS = {
+  border: "2px solid hsl(26, 100%, 55%)",
+  filter: "brightness(70%) opacity(0.5)",
+  // background: linear-gradient(to bottom, rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0.2));
+};
+
+export function MainCnt({ handleBtnClick }) {
   // this is my approach(when i think this idea will came)
   const [iscarousel, setIscarousel] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  const [imageUrl, setImageUrl] = useState(imagesMain);
 
   const [fiImg, setFiImg] = useState(true, 0);
   const [sec, setSec] = useState(false, 1);
@@ -56,20 +68,20 @@ export function MainCnt() {
   };
 
   calculateamount();
-  const activeCSS = {
-    border: "2px solid hsl(26, 100%, 55%)",
-    filter: "brightness(70%) opacity(0.5)",
-    // background: linear-gradient(to bottom, rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0.2));
-  };
 
   return (
     <main id="main-di" style={{ marginTop: "75px", minWidth: "450px" }}>
       <div id="main-pic" style={{ display: "flex", flexDirection: "column" }}>
         <div onClick={() => setIscarousel(!iscarousel)}>
-          {fiImg ? <img id="images-main" src={imagesMain} /> : ""}
+          {/* {fiImg ? <img id="images-main" src={imagesMain} /> : ""}
           {sec ? <img id="images-main" src={imagesMain2} /> : ""}
           {thir ? <img id="images-main" src={imagesMain3} /> : ""}
-          {four ? <img id="images-main" src={imagesMain4} /> : ""}
+          {four ? <img id="images-main" src={imagesMain4} /> : ""} */}
+          <img
+            src={mainImagesArr[selectedImage]}
+            id="images-main"
+            alt="main-img"
+          />
         </div>
         {iscarousel ? (
           <div
@@ -89,25 +101,18 @@ export function MainCnt() {
             }}
           >
             <Carousel>
-              <div>
-                <img
-                  style={{
-                    width: "300px",
-                    background: "none",
-                    opacity: "none",
-                  }}
-                  src={imagesMain}
-                />
-                {/* <p className="legend">Legend 1</p> */}
-              </div>
-              <div>
-                <img style={{ width: "300px" }} src={imagesMain2} />
-                {/* <p className="legend">Legend 2</p> */}
-              </div>
-              <div>
-                <img style={{ width: "300px" }} src={imagesMain3} />
-                {/* <p className="legend">Legend 3</p> */}
-              </div>
+              {mainImagesArr.map((item, index) => (
+                <div key={index}>
+                  <img
+                    style={{
+                      width: "300px",
+                      background: "none",
+                      opacity: "none",
+                    }}
+                    src={item}
+                  />
+                </div>
+              ))}
             </Carousel>
           </div>
         ) : (
@@ -122,7 +127,21 @@ export function MainCnt() {
             marginTop: "40px",
           }}
         >
-          <img
+          {mainImagesArr.map((item, index) => (
+            <img
+              key={index}
+              id="images-sub"
+              className={`images-sub-${index}`}
+              onClick={() => setSelectedImage(index)}
+              width="70px"
+              height="150px"
+              style={selectedImage === index ? activeCSS : {}}
+              // style={fiImg ? { backgroundColor: "red", border: "1px solid" } : {}}
+
+              src={item}
+            />
+          ))}
+          {/* <img
             id="images-sub"
             onClick={() => handleImageClick(setFiImg)}
             style={
@@ -175,7 +194,7 @@ export function MainCnt() {
                   }
                 : {}
             }
-          />
+          /> */}
         </div>
       </div>
       <div
@@ -262,6 +281,10 @@ export function MainCnt() {
           </div>
           <div
             className="add-but"
+            onClick={handleBtnClick}
+            // onClick={() => handleBtnClick}
+            // onClick={() => handleBtnClick()} // works
+            // onClick={handleBtnClick()}
             style={{
               width: "200px",
               height: "45px",

@@ -164,7 +164,11 @@
 
 .thumbs,
 .carousel-status {
-  display: none !important;
+  /* display: none !important; */
+  height: 35px !important;
+}
+.thumb {
+  height: 35px !important;
 }
 
 .carousel.carousel-slider .control-arrow {
